@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "WebTime Scrobbler",
+  "version": "1.0.0",
+  "description": "description",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": []
+}
