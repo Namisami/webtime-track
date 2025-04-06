@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "watch": "vite build --watch --mode development",
+    "watch": "vite build --watch",
     "dev": "vite dev",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/node": "^22.14.0",
+    "path": "^0.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "vite-plugin-static-copy": "^2.3.0",
