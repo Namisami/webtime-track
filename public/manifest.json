@@ -9,7 +9,8 @@
   "permissions": [
     "tabs",
     "activeTab",
-    "storage"
+    "storage",
+    "alarms"
   ],
   "background": {
     "service_worker": "src/scripts/background.ts"
