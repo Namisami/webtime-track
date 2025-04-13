@@ -20,7 +20,8 @@ export class Tab {
   startTime: number | null;
   endTime: number | null;
 
-  constructor(url: string) {
+  constructor(url?: string) {
+    if (!url) throw new Error("У вкладки должен быть URL");
     this.url = url;
     this.startTime = null;
     this.endTime = null;

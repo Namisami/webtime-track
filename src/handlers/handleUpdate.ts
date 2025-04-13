@@ -7,6 +7,8 @@ export default async function handleUpdate(
   tab: Tabs.Tab,
 ) {
   if (changeInfo.url && tab.active && tab.url) {
+    console.log("UPDATE TAB ID", tab.id);
+    // Проверка есть ли уже трекаемая вкладка
     if (ActiveTab.getInstance()) {
       await ActiveTab.getInstance().stopTimer();
       ActiveTab.setInstance(new Tab(tab.url));

@@ -1,21 +1,29 @@
-import browser from "webextension-polyfill";
-import './App.css'
-import { useEffect, useState } from "react";
+import '@/App.css'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [state, setState] = useState(0);
-  
-  useEffect(() => {
-    setInterval(() => {
-      setState((state) => state + 1);
-    }, 1000);
-    
-    browser.runtime.sendMessage({ type: "getTime"});
-  }, []);
+  const [getStorage, setStorage] = useLocalStorage("siteTimes");
+  const [state, setState] = useState<string[]>();
 
+  console.log("RENDER")
+  useEffect(() => {
+    console.log("USE EFFECT")
+    const getTimeIntervals = async () => {
+      const times = (await getStorage()).map(({ url, startTime, endTime }) => `
+        ${url}: ${dayjs(startTime).toDateTime()}-${dayjs(endTime).toDateTime()}
+      `);
+      console.log(times);
+      setState(times);
+    }
+
+    getTimeIntervals();
+  }, []);
+  
   return (
     <>
-      <p>dasa</p>
+      Статистика времени, проведенного на сайтах:
       { state }
     </>
   )
