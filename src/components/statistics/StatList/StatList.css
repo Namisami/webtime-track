@@ -1,0 +1,29 @@
+.stat-list {
+  flex: 1;
+}
+
+.stat-list__list {
+  overflow: auto;
+  height: 100%;
+}
+
+.stat-list__item {
+}
+
+.stat-item {
+  margin-bottom: 6px;
+}
+
+.stat-item__container {
+}
+
+.stat-item__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.stat-item__hostname {
+  font-weight: bold;
+  word-break: break-all;
+}

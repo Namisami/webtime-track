@@ -1,20 +1,22 @@
-import '@/App.css'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import StatList from '@/components/statistics/StatList/StatList';
+import { SiteTime } from '@/storage/types';
+import '@/App.css'
 
 function App() {
-  const [getStorage, setStorage] = useLocalStorage("siteTimes");
-  const [state, setState] = useState<string[]>();
+  const [getStorage] = useLocalStorage("siteTimes");
+  const [state, setState] = useState<SiteTime[]>([]);
 
   console.log("RENDER")
   useEffect(() => {
     console.log("USE EFFECT")
     const getTimeIntervals = async () => {
-      const times = (await getStorage()).map(({ url, startTime, endTime }) => `
-        ${url}: ${dayjs(startTime).toDateTime()}-${dayjs(endTime).toDateTime()}
-      `);
-      console.log(times);
+      const times = await getStorage();
+      // const times = (await getStorage()).map(({ url, startTime, endTime }) => `
+      //   ${URLFacade(url).hostname}: ${dayjs(startTime).toDateTime()}-${dayjs(endTime).toDateTime()}
+      // `);
+      // console.log(times);
       setState(times);
     }
 
@@ -23,8 +25,8 @@ function App() {
   
   return (
     <>
-      Статистика времени, проведенного на сайтах:
-      { state }
+      <p>Статистика времени, проведенного на сайтах:</p>
+      <StatList items={state} />
     </>
   )
 }
