@@ -7,8 +7,6 @@ export interface SiteTime {
 };
 
 export default interface LocalStorage {
-  activeUrl: string;
-  startTime: number;
   siteTimes: SiteTime[];
 };
 

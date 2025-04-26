@@ -1,4 +1,4 @@
-import { ActiveTab, Tab } from "@/entities/tab";
+import { ActiveTab } from "@/entities/tab";
 import { getTabById } from "@/functions/tab";
 import { Tabs } from "webextension-polyfill";
 
@@ -7,11 +7,5 @@ export default async function handleActivate(activeInfo: Tabs.OnActivatedActiveI
   const tab = await getTabById(activeInfo.tabId);
   if (!tab.url) return;
   
-  if (ActiveTab.getInstance()) {
-    await ActiveTab.getInstance().stopTimer();
-    ActiveTab.setInstance(new Tab(tab.url));
-  } else {
-    ActiveTab.setInstance(new Tab(tab.url));
-  }
-  ActiveTab.getInstance().startTimer();
+  await ActiveTab.reactivateTimer();
 };

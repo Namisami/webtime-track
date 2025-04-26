@@ -1,24 +1,38 @@
+// import { getActiveTab } from '@/functions/tab';
 import handleActivate from '@/handlers/handleActivate';
+import handleFocusChanged from '@/handlers/handleFocusChanged';
+import handleStateChanged from '@/handlers/handleStateChanged';
+import handleSuspend from '@/handlers/handleSuspend';
 import handleUpdate from '@/handlers/handleUpdate';
-import browser from 'webextension-polyfill';
+import Browser from 'webextension-polyfill';
+
+// async function trackTime() {
+//   console.log(await getActiveTab());
+// }
 
 try {
-
+  // setInterval(trackTime, 1000)
   // Инициализация хранилища при установке
-  browser.runtime.onInstalled.addListener(() => {
-    browser.storage.local.set({ siteTimes: [] });
+  Browser.runtime.onInstalled.addListener(() => {
+    Browser.storage.local.set({ siteTimes: [] });
   });
   
-  browser.tabs.onActivated.addListener(handleActivate);
-  browser.tabs.onUpdated.addListener(handleUpdate);
+  Browser.tabs.onActivated.addListener(handleActivate);
+  Browser.tabs.onUpdated.addListener(handleUpdate);
+
+  Browser.runtime.onSuspend.addListener(handleSuspend)
+
+  Browser.windows.onFocusChanged.addListener(handleFocusChanged);
+
+  Browser.idle.onStateChanged.addListener(handleStateChanged);
   
-  // browser.tabs.onActivated.addListener(async (activeInfo) => {
+  // Browser.tabs.onActivated.addListener(async (activeInfo) => {
   //   await updateTimeForPreviousUrl();
-  //   const tab = await browser.tabs.get(activeInfo.tabId);
+  //   const tab = await Browser.tabs.get(activeInfo.tabId);
   //   await setNewActiveUrl(tab.url);
   // });
   
-  // browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+  // Browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   //   if (changeInfo.url && tab.active) {
   //     await updateTimeForPreviousUrl();
   //     await setNewActiveUrl(changeInfo.url);
@@ -32,7 +46,7 @@ try {
   
   //   if (previousUrl && previousStartTime) {
   //     const timeSpent = Math.floor((Date.now() - previousStartTime) / 1000);
-  //     const existingData = (await browser.storage.local.get('siteTimes')).siteTimes || [];
+  //     const existingData = (await Browser.storage.local.get('siteTimes')).siteTimes || [];
   //     const index = existingData.findIndex(entry => entry.url === previousUrl);
   
   //     if (index !== -1) {
@@ -41,35 +55,35 @@ try {
   //       existingData.push({ url: previousUrl, time: timeSpent });
   //     }
   
-  //     await browser.storage.local.set({ siteTimes: existingData });
+  //     await Browser.storage.local.set({ siteTimes: existingData });
   //   }
   // }
   
   // async function setNewActiveUrl(url: string | undefined): Promise<void> {
   //   if (!url) return;
-  //   await browser.storage.local.set({
+  //   await Browser.storage.local.set({
   //     activeUrl: url,
   //     startTime: Date.now()
   //   });
   // }
   
    // Периодическое обновление времени каждую минуту
-  // browser.alarms.create('updateTime', { periodInMinutes: 1 });
-  // browser.alarms.onAlarm.addListener(async (alarm) => {
+  // Browser.alarms.create('updateTime', { periodInMinutes: 1 });
+  // Browser.alarms.onAlarm.addListener(async (alarm) => {
   //   if (alarm.name === 'updateTime') {
   //     await updateCurrentUrlTime();
   //   }
   // });
 
 //   async function updateCurrentUrlTime(): Promise<void> {
-//     const data = await browser.storage.local.get(['activeUrl', 'startTime']);
+//     const data = await Browser.storage.local.get(['activeUrl', 'startTime']);
     
 //     const currentUrl = data.activeUrl;
 //     const currentStartTime = data.startTime;
   
 //     if (currentUrl && currentStartTime) {
 //       const timeSpent = Math.floor((Date.now() - currentStartTime) / 1000);
-//       const existingData = (await browser.storage.local.get('siteTimes')).siteTimes || [];
+//       const existingData = (await Browser.storage.local.get('siteTimes')).siteTimes || [];
 //       const index = existingData.findIndex(entry => entry.url === currentUrl);
   
 //       if (index !== -1) {
@@ -78,7 +92,7 @@ try {
 //         existingData.push({ url: currentUrl, time: timeSpent });
 //       }
   
-//       await browser.storage.local.set({
+//       await Browser.storage.local.set({
 //         siteTimes: existingData,
 //         startTime: Date.now()
 //       });

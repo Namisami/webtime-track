@@ -10,7 +10,8 @@
     "tabs",
     "activeTab",
     "storage",
-    "alarms"
+    "alarms",
+    "idle"
   ],
   "background": {
     "service_worker": "src/scripts/background.ts"

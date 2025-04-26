@@ -1,5 +1,6 @@
+import { getActiveTab } from "@/functions/tab";
 import { appendLocalStorage } from "@/storage/helper";
-// import Browser from "webextension-polyfill";
+import { Tabs } from "webextension-polyfill";
 
 export class ActiveTab {
   static instance: Tab;
@@ -13,22 +14,48 @@ export class ActiveTab {
   static setInstance(tab: Tab) {
     ActiveTab.instance = tab;
   }
+
+  static async startActiveTimer() {
+    ActiveTab.getInstance().startTimer();
+  }
+
+  static async stopActiveTimer() {
+    if (ActiveTab.getInstance()) {
+      await ActiveTab.getInstance().stopTimer();
+    }
+  }
+
+  static async reactivateTimer() {
+    const tab = await getActiveTab();
+    if (ActiveTab.getInstance()) {
+      await ActiveTab.getInstance().stopTimer();
+    }
+    ActiveTab.setInstance(new Tab(tab));
+    ActiveTab.getInstance().startTimer();
+  }
 }
 
 export class Tab {
+  tabId: number;
+  windowId: number;
   url: string;
   startTime: number | null;
   endTime: number | null;
 
-  constructor(url?: string) {
-    if (!url) throw new Error("У вкладки должен быть URL");
+  constructor({ 
+    id: tabId,
+    windowId,
+    url, 
+  }: Tabs.Tab) {
+    if (!url || !tabId || !windowId) throw new Error("Вкладка не валидна");
     this.url = url;
+    this.tabId = tabId;
+    this.windowId = windowId;
     this.startTime = null;
     this.endTime = null;
   }
 
   startTimer() {
-    if (!this.url) throw new Error("Нельзя запустить таймер в вкладке без URL");
     this.startTime = Date.now();
   }
 
