@@ -1,4 +1,4 @@
-import { ArrayKeys } from "@/types/helper";
+import { ArrayKeys } from "@/core/types/helper";
 
 export interface SiteTime {
   url: string;

@@ -1,5 +1,5 @@
-import { getActiveTab } from "@/functions/tab";
-import { appendLocalStorage } from "@/storage/helper";
+import { getActiveTab } from "@/core/functions/tab";
+import { appendLocalStorage } from "@/core/storage/helper";
 import { Tabs } from "webextension-polyfill";
 
 export class ActiveTab {
@@ -67,11 +67,14 @@ export class Tab {
 
   async save() {
     if (!this.url || !this.endTime || !this.startTime) throw new Error("Ошибка при сохранении интервала");
-
-    await appendLocalStorage("siteTimes", [{ 
-      url: this.url,
-      startTime: this.startTime,
-      endTime: this.endTime,
-    }]);
+    
+    // Исключаем сайты, на которых пользователь провел меньше секунды
+    if (this.endTime - this.startTime > 1000) {
+      await appendLocalStorage("siteTimes", [{ 
+        url: this.url,
+        startTime: this.startTime,
+        endTime: this.endTime,
+      }]);
+    }
   }
 }

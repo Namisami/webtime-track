@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { extendDayjsPlugin } from '@/plugins/dayjs'
+import { extendDayjsPlugin } from '@/core/plugins/dayjs'
 import App from '@/App.tsx'
 import '@/index.css'
 

@@ -2,9 +2,9 @@ import { memo } from "react";
 import { reverse, sortBy } from "lodash";
 import dayjs from "dayjs";
 import { URLFacade } from "@/utils/urls";
-import Progressbar from "@/components/common/Progressbar/Progressbar";
-import Box from "@/components/common/Box/Box";
-import { SiteTime } from "@/storage/types";
+import Progressbar from "@/ui/components/common/Progressbar/Progressbar";
+import Box from "@/ui/components/common/Box/Box";
+import { SiteTime } from "@/core/storage/types";
 import "./StatList.css";
 
 export type StatListProps = {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import StatList from '@/components/statistics/StatList/StatList';
-import { SiteTime } from '@/storage/types';
+import { useLocalStorage } from '@/ui/hooks/useLocalStorage'
+import StatList from '@/ui/components/statistics/StatList/StatList';
+import { SiteTime } from '@/core/storage/types';
 import '@/App.css'
 
 function App() {

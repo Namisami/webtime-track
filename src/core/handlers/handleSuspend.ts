@@ -1,5 +1,5 @@
-import { ActiveTab } from "@/entities/tab";
-import { getActiveTab } from "@/functions/tab";
+import { ActiveTab } from "@/core/entities/tab";
+import { getActiveTab } from "@/core/functions/tab";
 
 export default async function handleSuspend() {
   console.warn("SUSPEND");

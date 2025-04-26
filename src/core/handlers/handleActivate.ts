@@ -1,5 +1,5 @@
-import { ActiveTab } from "@/entities/tab";
-import { getTabById } from "@/functions/tab";
+import { ActiveTab } from "@/core/entities/tab";
+import { getTabById } from "@/core/functions/tab";
 import { Tabs } from "webextension-polyfill";
 
 export default async function handleActivate(activeInfo: Tabs.OnActivatedActiveInfoType) {

@@ -1,9 +1,9 @@
 // import { getActiveTab } from '@/functions/tab';
-import handleActivate from '@/handlers/handleActivate';
-import handleFocusChanged from '@/handlers/handleFocusChanged';
-import handleStateChanged from '@/handlers/handleStateChanged';
-import handleSuspend from '@/handlers/handleSuspend';
-import handleUpdate from '@/handlers/handleUpdate';
+import handleActivate from '@/core/handlers/handleActivate';
+import handleFocusChanged from '@/core/handlers/handleFocusChanged';
+import handleStateChanged from '@/core/handlers/handleStateChanged';
+import handleSuspend from '@/core/handlers/handleSuspend';
+import handleUpdate from '@/core/handlers/handleUpdate';
 import Browser from 'webextension-polyfill';
 
 // async function trackTime() {

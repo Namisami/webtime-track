@@ -1,4 +1,4 @@
-import { ActiveTab } from "@/entities/tab";
+import { ActiveTab } from "@/core/entities/tab";
 import { Idle } from "webextension-polyfill"
 
 export default async function handleStateChanged(newState: Idle.IdleState) {

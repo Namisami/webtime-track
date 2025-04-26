@@ -1,4 +1,4 @@
-import { ActiveTab, Tab } from "@/entities/tab";
+import { ActiveTab, Tab } from "@/core/entities/tab";
 import { Tabs } from "webextension-polyfill";
 
 export default async function handleUpdate(

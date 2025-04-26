@@ -1,4 +1,4 @@
-import LocalStorage, { LocalStorageArrayKeys, LocalStorageKeys } from "@/storage/types";
+import LocalStorage, { LocalStorageArrayKeys, LocalStorageKeys } from "@/core/storage/types";
 import Browser from "webextension-polyfill";
 
 export async function getLocalStorageByParams<T extends LocalStorageKeys>(

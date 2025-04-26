@@ -14,11 +14,11 @@
     "idle"
   ],
   "background": {
-    "service_worker": "src/scripts/background.ts"
+    "service_worker": "src/background.ts"
   },
   "content_scripts": [
     {
-      "js": ["src/scripts/script.ts"],
+      "js": ["src/script.ts"],
       "matches": ["<all_urls>"]
     }
   ]

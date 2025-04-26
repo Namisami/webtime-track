@@ -1,4 +1,4 @@
-import { ActiveTab } from "@/entities/tab";
+import { ActiveTab } from "@/core/entities/tab";
 import { windows } from "webextension-polyfill";
 
 const { WINDOW_ID_NONE } = windows;
