@@ -1,4 +1,4 @@
-import LocalStorage, { LocalStorageArrayKeys, LocalStorageKeys } from "@/core/storage/types";
+import LocalStorage, { LocalStorageArrayKeys, LocalStorageKeys, LocalStorageObjectKeys } from "@/core/storage/types";
 import Browser from "webextension-polyfill";
 
 export async function getLocalStorageByParams<T extends LocalStorageKeys>(
@@ -33,4 +33,13 @@ export async function appendLocalStorage<
   if (!Array.isArray(existing)) throw new Error('Метод appendLocalStorage работает только с типом Array');
   const appended = { [key]: [...existing, ...value] };
   await Browser.storage.local.set(appended);
+}
+
+export async function updateLocalStorage<
+  K extends LocalStorageObjectKeys,
+  T extends LocalStorage[K]
+>(key: K, value: T) {
+  const existing = (await Browser.storage.local.get(key))[key] as T;
+  const updated = { [key]: { ...existing, ...value }};
+  await Browser.storage.local.set(updated);
 }

@@ -1,10 +1,12 @@
 // import { getActiveTab } from '@/functions/tab';
+import Browser from 'webextension-polyfill';
 import handleActivate from '@/core/handlers/handleActivate';
 import handleFocusChanged from '@/core/handlers/handleFocusChanged';
 import handleStateChanged from '@/core/handlers/handleStateChanged';
 import handleSuspend from '@/core/handlers/handleSuspend';
 import handleUpdate from '@/core/handlers/handleUpdate';
-import Browser from 'webextension-polyfill';
+import handleInstall from '@/core/handlers/handleInstall';
+import handleStorageChanged from '@/core/handlers/handleStorageChanged';
 
 // async function trackTime() {
 //   console.log(await getActiveTab());
@@ -13,9 +15,7 @@ import Browser from 'webextension-polyfill';
 try {
   // setInterval(trackTime, 1000)
   // Инициализация хранилища при установке
-  Browser.runtime.onInstalled.addListener(() => {
-    Browser.storage.local.set({ siteTimes: [] });
-  });
+  Browser.runtime.onInstalled.addListener(handleInstall);
   
   Browser.tabs.onActivated.addListener(handleActivate);
   Browser.tabs.onUpdated.addListener(handleUpdate);
@@ -26,6 +26,8 @@ try {
 
   Browser.idle.onStateChanged.addListener(handleStateChanged);
   
+  Browser.storage.onChanged.addListener(handleStorageChanged);
+
   // Browser.tabs.onActivated.addListener(async (activeInfo) => {
   //   await updateTimeForPreviousUrl();
   //   const tab = await Browser.tabs.get(activeInfo.tabId);

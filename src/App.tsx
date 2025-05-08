@@ -13,15 +13,11 @@ function App() {
     console.log("USE EFFECT")
     const getTimeIntervals = async () => {
       const times = await getStorage();
-      // const times = (await getStorage()).map(({ url, startTime, endTime }) => `
-      //   ${URLFacade(url).hostname}: ${dayjs(startTime).toDateTime()}-${dayjs(endTime).toDateTime()}
-      // `);
-      // console.log(times);
       setState(times);
     }
 
     getTimeIntervals();
-  }, []);
+  }, [getStorage]);
   
   return (
     <>
