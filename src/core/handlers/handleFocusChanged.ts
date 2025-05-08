@@ -7,7 +7,7 @@ export default async function handleFocusChanged(windowId: number) {
   console.log("FOCUS CHANGED", windowId);
   if (windowId === WINDOW_ID_NONE) {
     await ActiveTab.stopActiveTimer();
-  } else if (windowId === ActiveTab.getInstance().windowId) {
+  } else if (ActiveTab.getInstance() && windowId === ActiveTab.getInstance().windowId) {
     await ActiveTab.startActiveTimer();
   }
 }
