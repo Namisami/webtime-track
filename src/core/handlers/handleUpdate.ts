@@ -11,9 +11,9 @@ export default async function handleUpdate(
     // Проверка есть ли уже трекаемая вкладка
     if (ActiveTab.getInstance()) {
       await ActiveTab.getInstance().stopTimer();
-      ActiveTab.setInstance(new Tab(tab.url));
+      ActiveTab.setInstance(new Tab(tab));
     } else {
-      ActiveTab.setInstance(new Tab(tab.url));
+      ActiveTab.setInstance(new Tab(tab));
     }
     ActiveTab.getInstance().startTimer();
   }

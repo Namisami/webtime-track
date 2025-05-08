@@ -33,9 +33,7 @@ async function handleSiteTimesChanged({
   endTime
 }: LocalStorage["siteTimes"][number]) {
   const updatedSite = await (new StatisticsItemStorage(url).init());
-  if (updatedSite.exist) {
-    updatedSite.sessionCount += 1;
-    updatedSite.timeCount += endTime - startTime;
-  }
+  updatedSite.sessionCount += 1;
+  updatedSite.timeCount += endTime - startTime;
   await updateLocalStorage("statistics", { [url]: updatedSite.getItem() });
 };
