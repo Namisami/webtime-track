@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from '@/ui/hooks/useLocalStorage'
 import StatList from '@/ui/components/statistics/StatList/StatList';
-import { SiteTime } from '@/core/storage/types';
 import '@/App.css'
+import LocalStorage from './core/storage/types';
 
 function App() {
-  const [getStorage] = useLocalStorage("siteTimes");
-  const [state, setState] = useState<SiteTime[]>([]);
+  const [getStorage] = useLocalStorage("statistics");
+  const [state, setState] = useState<LocalStorage["statistics"]>({});
 
   console.log("RENDER")
   useEffect(() => {
     console.log("USE EFFECT")
     const getTimeIntervals = async () => {
-      const times = await getStorage();
-      setState(times);
+      const statistics = await getStorage();
+      setState(statistics);
     }
 
     getTimeIntervals();

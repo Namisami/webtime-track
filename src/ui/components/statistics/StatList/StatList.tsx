@@ -4,17 +4,25 @@ import dayjs from "dayjs";
 import { URLFacade } from "@/utils/urls";
 import Progressbar from "@/ui/components/common/Progressbar/Progressbar";
 import Box from "@/ui/components/common/Box/Box";
-import { SiteTime } from "@/core/storage/types";
+import { Statistics } from "@/core/storage/types";
 import "./StatList.css";
 
 export type StatListProps = {
-  items: SiteTime[];
+  items: Statistics;
 };
 
-const StatList = memo(({ items }: StatListProps) => {
-  const sortedItems = reverse(sortBy(items, [function (o) { return o.endTime - o.startTime }]));
-  const summaryTime = sortedItems.reduce((acc, item) => acc += (item.endTime - item.startTime), 0);
+function objectToArray<T extends object, K extends string>(obj: Record<string, T>, keyProperty: K) {
+  return Object.keys(obj).reduce((acc, key) => {
+    acc.push({ [keyProperty]: key, ...obj[key] } as (T & {[key in K]: string}));
+    return acc;
+  }, [] as (T & {[key in K]: string})[]);
+}
 
+const StatList = memo(({ items }: StatListProps) => {
+  const itemsWithUrl = objectToArray(items, "url"); 
+  const sortedItems = reverse(sortBy(itemsWithUrl, "timeCount"));
+  const summaryTime = sortedItems.reduce((acc, item) => acc += item.timeCount, 0);
+  console.log("STATISTICS", items, sortedItems);
   return (
     <Box className="stat-list">
       <ul className="stat-list__list">
@@ -28,21 +36,18 @@ const StatList = memo(({ items }: StatListProps) => {
 export type StatItemProps = {
   url: string;
   summaryTime: number;
-  startTime: number;
-  endTime: number;
+  timeCount: number;
+  sessionCount: number;
 }
 
 export const StatItem = memo(({
   url,
   summaryTime,
-  startTime,
-  endTime,
+  timeCount,
+  sessionCount,
 }: StatItemProps) => {
   const hostname = URLFacade(url).hostname;
-  const start = dayjs(startTime);
-  const end = dayjs(endTime);
-  const msSpend = end.diff(start);
-  const timeSpend = dayjs(msSpend).toTime();
+  const timeSpend = dayjs(timeCount).toTime();
   
   return (
     <li className="stat-item">
@@ -50,11 +55,11 @@ export const StatItem = memo(({
         {/* <img className="stat-item__icon"></img> */}
         <div className="stat-item__header">
           <span className="stat-item__hostname">{hostname}</span>
-          <span className="stat-item__interval">{timeSpend}</span>
+          <span className="stat-item__interval">{timeSpend} ({sessionCount})</span>
         </div>
         <Progressbar 
           className="stat-item__progressbar" 
-          value={msSpend}
+          value={timeCount}
           max={summaryTime}
         />
       </div>
