@@ -2,7 +2,6 @@ import LocalStorage, { LocalStorageKeys } from "@/core/storage/types";
 import { getLocalStorageByParams, setLocalStorage } from "@/core/storage/helper";
 import { useCallback } from "react";
 
-// Перегрузки для разных сценариев
 export function useLocalStorage<T extends LocalStorageKeys>(
   key: T
 ): [

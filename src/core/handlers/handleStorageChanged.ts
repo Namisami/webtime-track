@@ -2,7 +2,7 @@ import Browser from "webextension-polyfill";
 import { updateLocalStorage } from "@/core/storage/helper";
 import LocalStorage, { LocalStorageArrayKeys } from "@/core/storage/types";
 import { ArrayElement } from "@/core/types/helper";
-import { StatisticsItemStorage } from "../entities/storage/statisticsItem";
+import { StatisticsItemStorage } from "@/core/entities/storage/statisticsItem";
 
 // Действует только для массивов
 function extractLastChanges<T extends LocalStorageArrayKeys>(
@@ -20,10 +20,10 @@ export default async function handleStorageChanged(
   changes: Record<string, Browser.Storage.StorageChange>, 
   areaName: string
 ) {
+  console.log("STORAGE CHANGED", changes, areaName);
   const {
     siteTimes,
   } = extractLastChanges(changes, ["siteTimes"]);
-  console.log("STORAGE CHANGED", changes, areaName);
   if (siteTimes) await handleSiteTimesChanged(siteTimes);
 }
 
