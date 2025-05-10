@@ -21,9 +21,9 @@ export function useLocalStorage<T extends LocalStorageKeys | readonly LocalStora
 ) {
   const get = useCallback(async () => {
     if (Array.isArray(keys)) {
-      return getLocalStorageByParams(keys as unknown as LocalStorageKeys[]);
+      return await getLocalStorageByParams(keys as LocalStorageKeys[]);
     }
-    return getLocalStorageByParams(keys as LocalStorageKeys);
+    return await getLocalStorageByParams(keys as LocalStorageKeys);
   }, [keys]);
 
   const set = useCallback(async (values: Partial<LocalStorage>) => {
