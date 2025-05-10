@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { URLFacade } from "@/utils/urls";
 import Progressbar from "@/ui/components/common/Progressbar/Progressbar";
 import Box from "@/ui/components/common/Box/Box";
-import { Statistics } from "@/core/storage/types";
+import { Statistics, StatisticsItem } from "@/core/storage/types";
 import "./StatList.css";
 
 export type StatListProps = {
@@ -36,13 +36,12 @@ const StatList = memo(({ items }: StatListProps) => {
 export type StatItemProps = {
   url: string;
   summaryTime: number;
-  timeCount: number;
-  sessionCount: number;
-}
+} & StatisticsItem;
 
 export const StatItem = memo(({
   url,
   summaryTime,
+  faviconUrl,
   timeCount,
   sessionCount,
 }: StatItemProps) => {
@@ -52,16 +51,18 @@ export const StatItem = memo(({
   return (
     <li className="stat-item">
       <div className="stat-item__container">
-        {/* <img className="stat-item__icon"></img> */}
-        <div className="stat-item__header">
-          <span className="stat-item__hostname">{hostname}</span>
-          <span className="stat-item__interval">{timeSpend} ({sessionCount})</span>
+        <img className="stat-item__icon" src={faviconUrl} />
+        <div className="stat-item__content">
+          <div className="stat-item__header">
+            <span className="stat-item__hostname">{hostname}</span>
+            <span className="stat-item__interval">{timeSpend} ({sessionCount})</span>
+          </div>
+          <Progressbar 
+            className="stat-item__progressbar" 
+            value={timeCount}
+            max={summaryTime}
+          />
         </div>
-        <Progressbar 
-          className="stat-item__progressbar" 
-          value={timeCount}
-          max={summaryTime}
-        />
       </div>
     </li>
   )  

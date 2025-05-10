@@ -7,6 +7,7 @@ export interface SiteTime {
 };
 
 export type StatisticsItem = {
+  faviconUrl?: string;
   timeCount: number;
   sessionCount: number;
 }

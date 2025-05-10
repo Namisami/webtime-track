@@ -1,5 +1,7 @@
 import { getLocalStorageByParams } from "@/core/storage/helper";
 import { StatisticsItem } from "@/core/storage/types";
+import { ActiveTab } from "../tab";
+import { getTabById } from "@/core/functions/tab";
 
 export class StatisticsItemStorage {
   #url: string;
@@ -19,9 +21,10 @@ export class StatisticsItemStorage {
     const statistics = await getLocalStorageByParams("statistics");
     const existingStatItem = statistics[this.#url];
     if (existingStatItem) {
-      this.#item = statistics[this.#url]
+      this.#item = existingStatItem;
       this.#exist = true;
     };
+    this.#item.faviconUrl = (await getTabById(ActiveTab.getInstance().tabId)).favIconUrl;
     return this;
   }
   

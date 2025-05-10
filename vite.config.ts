@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [
     react(),
     webExtension({
+      additionalInputs: ['index.html'],
       manifest: 'public/manifest.json'
     }),
   ],

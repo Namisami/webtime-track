@@ -20,7 +20,6 @@ export class ActiveTab {
   }
 
   static async stopActiveTimer() {
-    console.log(ActiveTab.getInstance());
     if (ActiveTab.getInstance()) {
       await ActiveTab.getInstance().stopTimer();
     }

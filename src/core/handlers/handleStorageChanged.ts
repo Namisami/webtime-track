@@ -9,7 +9,6 @@ function extractLastChanges<T extends LocalStorageArrayKeys>(
   changes: Record<string, Browser.Storage.StorageChange>, 
   keys: T[],
 ): { [K in T]: ArrayElement<LocalStorage[K]> | undefined } {
-  console.log(changes);
   return keys.reduce((acc, key) => {
     acc[key] = (changes[key]?.newValue as ArrayElement<LocalStorage[T]>[])?.at(-1);
     return acc;

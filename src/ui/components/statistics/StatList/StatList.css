@@ -15,6 +15,12 @@
 }
 
 .stat-item__container {
+  display: flex;
+}
+
+.stat-item__icon {
+  width: 24px;
+  height: 24px;
 }
 
 .stat-item__header {
