@@ -1,7 +1,6 @@
 import { getLocalStorageByParams } from "@/core/storage/helper";
 import { StatisticsItem } from "@/core/storage/types";
-import { ActiveTab } from "../tab";
-import { getTabById } from "@/core/functions/tab";
+import { URLFacade } from "@/utils/urls";
 
 export class StatisticsItemStorage {
   #url: string;
@@ -24,7 +23,7 @@ export class StatisticsItemStorage {
       this.#item = existingStatItem;
       this.#exist = true;
     };
-    this.#item.faviconUrl = (await getTabById(ActiveTab.getInstance().tabId)).favIconUrl;
+    this.#item.faviconUrl = `https://www.google.com/s2/favicons?domain=${URLFacade(this.#url).origin}&sz=24`;
     return this;
   }
   

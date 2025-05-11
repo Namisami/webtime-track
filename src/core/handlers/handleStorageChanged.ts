@@ -1,8 +1,11 @@
 import Browser from "webextension-polyfill";
 import { updateLocalStorage } from "@/core/storage/helper";
-import LocalStorage, { LocalStorageArrayKeys } from "@/core/storage/types";
+import LocalStorage, { LocalStorageArrayKeys, LocalStorageKeys } from "@/core/storage/types";
 import { ArrayElement } from "@/core/types/helper";
 import { StatisticsItemStorage } from "@/core/entities/storage/statisticsItem";
+import { intersection } from "lodash";
+
+const WATCH_KEYS: LocalStorageKeys[] = ["siteTimes"];
 
 // Действует только для массивов
 function extractLastChanges<T extends LocalStorageArrayKeys>(
@@ -19,6 +22,8 @@ export default async function handleStorageChanged(
   changes: Record<string, Browser.Storage.StorageChange>, 
   areaName: string
 ) {
+  if (!(intersection(Object.keys(changes), WATCH_KEYS).length)) return;
+
   console.log("STORAGE CHANGED", changes, areaName);
   const {
     siteTimes,

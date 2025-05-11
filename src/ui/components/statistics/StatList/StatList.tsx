@@ -51,7 +51,7 @@ export const StatItem = memo(({
   return (
     <li className="stat-item">
       <div className="stat-item__container">
-        <img className="stat-item__icon" src={faviconUrl} />
+        { faviconUrl && <img className="stat-item__icon" src={faviconUrl} /> }
         <div className="stat-item__content">
           <div className="stat-item__header">
             <span className="stat-item__hostname">{hostname}</span>

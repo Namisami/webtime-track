@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocalStorage } from '@/ui/hooks/useLocalStorage'
 import StatList from '@/ui/components/statistics/StatList/StatList';
 import LocalStorage from '@/core/storage/types';
-import '@/App.css'
+import './App.css'
 
 function App() {
   const [getStorage] = useLocalStorage("statistics");
