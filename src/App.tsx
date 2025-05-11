@@ -3,6 +3,8 @@ import { useLocalStorage } from '@/ui/hooks/useLocalStorage'
 import StatList from '@/ui/components/statistics/StatList/StatList';
 import LocalStorage from '@/core/storage/types';
 import './App.css'
+import PieChart from './ui/components/statistics/PieChart/PieChart';
+import { objectToArray } from './utils/objects';
 
 function App() {
   const [getStorage] = useLocalStorage("statistics");
@@ -29,6 +31,7 @@ function App() {
   return (
     <>
       <h1>Статистика времени, проведенного на сайтах</h1>
+      <PieChart data={objectToArray(state, "url")} />
       <StatList items={state} />
     </>
   )

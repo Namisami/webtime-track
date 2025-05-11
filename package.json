@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@types/node": "^22.14.0",
+    "ag-charts-react": "^11.2.4",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "path": "^0.12.7",

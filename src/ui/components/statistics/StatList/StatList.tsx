@@ -6,17 +6,11 @@ import Progressbar from "@/ui/components/common/Progressbar/Progressbar";
 import Box from "@/ui/components/common/Box/Box";
 import { Statistics, StatisticsItem } from "@/core/storage/types";
 import "./StatList.css";
+import { objectToArray } from "@/utils/objects";
 
 export type StatListProps = {
   items: Statistics;
 };
-
-function objectToArray<T extends object, K extends string>(obj: Record<string, T>, keyProperty: K) {
-  return Object.keys(obj).reduce((acc, key) => {
-    acc.push({ [keyProperty]: key, ...obj[key] } as (T & {[key in K]: string}));
-    return acc;
-  }, [] as (T & {[key in K]: string})[]);
-}
 
 const StatList = memo(({ items }: StatListProps) => {
   const itemsWithUrl = objectToArray(items, "url"); 

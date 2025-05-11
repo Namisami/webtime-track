@@ -1,5 +1,6 @@
 .stat-list {
   flex: 1;
+  height: 0%;
 }
 
 .stat-list__list {
@@ -16,9 +17,12 @@
 
 .stat-item__container {
   display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .stat-item__content {
+  width: 100%;
 }
 
 .stat-item__icon {
