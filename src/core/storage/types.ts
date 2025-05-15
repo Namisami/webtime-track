@@ -20,7 +20,11 @@ export interface Statistics {
   [url: string]: StatisticsItem;
 };
 
-export default interface LocalStorage {
+export interface CommonStorageParams {
+  date: string;
+}
+
+export default interface LocalStorage extends CommonStorageParams {
   siteTimes: SiteTime[];
   statistics: Statistics;
 };

@@ -25,6 +25,14 @@ export async function setLocalStorage<
   await Browser.storage.local.set(entries);
 }
 
+export async function setLocalStorageByParam<
+  K extends LocalStorageKeys,
+  T extends LocalStorage[K]  
+>(key: K, value: T) {
+  const storage = await Browser.storage.local.get(null) as unknown as LocalStorage;
+  await Browser.storage.local.set({ ...storage, [key]: value });
+}
+
 export async function appendLocalStorage<
   K extends LocalStorageArrayKeys,
   T extends LocalStorage[K]

@@ -1,7 +1,8 @@
-import { getActiveTab } from "@/core/functions/tab";
-import { appendLocalStorage } from "@/core/storage/helper";
-import dayjs from "dayjs";
 import { Tabs } from "webextension-polyfill";
+import dayjs from "dayjs";
+import { sendSiteTimes } from "@/api/siteTimes";
+import { getActiveTab } from "@/core/functions/tab";
+import { appendLocalStorage, getLocalStorageByParams, setLocalStorageByParam } from "@/core/storage/helper";
 
 export class ActiveTab {
   static instance: Tab;
@@ -74,6 +75,18 @@ export class Tab {
   async save() {
     if (!this.url || !this.endTime || !this.startTime) throw new Error("Ошибка при сохранении интервала");
     
+    const today = dayjs().formatServer();
+    const storageDate = await getLocalStorageByParams("date");
+    if (today !== storageDate) {
+      const intervals = await getLocalStorageByParams("siteTimes");
+      const response = await sendSiteTimes(intervals)
+      await setLocalStorageByParam("date", today);
+      if (!response?.error) {
+        await setLocalStorageByParam("siteTimes", []);
+        await setLocalStorageByParam("statistics", {});
+      }
+    }
+    
     // Исключаем сайты, на которых пользователь провел меньше секунды
     if (this.endTime - this.startTime > 1000) {
       await appendLocalStorage("siteTimes", [{ 
@@ -81,7 +94,7 @@ export class Tab {
         startTime: Math.floor(this.startTime / 1000),
         endTime: Math.floor(this.endTime / 1000),
         faviconUrl: this.faviconUrl,
-        date: dayjs().formatServer(),
+        date: today,
       }]);
     }
   }
