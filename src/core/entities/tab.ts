@@ -20,7 +20,8 @@ export class ActiveTab {
   }
 
   static async stopActiveTimer() {
-    if (ActiveTab.getInstance()) {
+    const tab = ActiveTab.getInstance();
+    if (tab && !tab.endTime) {
       await ActiveTab.getInstance().stopTimer();
     }
   }
@@ -57,6 +58,7 @@ export class Tab {
 
   startTimer() {
     this.startTime = Date.now();
+    this.endTime = null;
   }
 
   async stopTimer() {

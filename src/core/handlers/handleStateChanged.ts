@@ -10,5 +10,6 @@ export default async function handleStateChanged(newState: Idle.IdleState) {
       break;
     case "active":
       await ActiveTab.startActiveTimer();
+      break;
   }
 };
