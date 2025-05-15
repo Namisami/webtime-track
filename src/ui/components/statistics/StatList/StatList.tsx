@@ -15,7 +15,7 @@ const StatList = memo(({ items }: StatListProps) => {
   const itemsWithUrl = objectToArray(items, "url"); 
   const sortedItems = reverse(sortBy(itemsWithUrl, "timeCount"));
   const summaryTime = sortedItems.reduce((acc, item) => acc += item.timeCount, 0);
-  console.log("STATISTICS", items, sortedItems);
+
   return (
     <Box className="stat-list">
       <ul className="stat-list__list">
@@ -38,7 +38,7 @@ export const StatItem = memo(({
   timeCount,
   sessionCount,
 }: StatItemProps) => {
-  const timeSpend = dayjs(timeCount).toTime();
+  const timeSpend = dayjs(timeCount * 1000).toTime();
   
   return (
     <li className="stat-item">

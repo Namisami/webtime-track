@@ -78,8 +78,8 @@ export class Tab {
     if (this.endTime - this.startTime > 1000) {
       await appendLocalStorage("siteTimes", [{ 
         url: this.url,
-        startTime: this.startTime,
-        endTime: this.endTime,
+        startTime: Math.floor(this.startTime / 1000),
+        endTime: Math.floor(this.endTime / 1000),
         faviconUrl: this.faviconUrl,
         date: dayjs().formatServer(),
       }]);

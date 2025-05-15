@@ -15,7 +15,11 @@
     "tabs",
     "activeTab",
     "storage",
-    "idle"
+    "idle",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*"
   ],
   "background": {
     "service_worker": "src/background.ts",

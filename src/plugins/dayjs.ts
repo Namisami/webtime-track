@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
@@ -11,12 +11,12 @@ declare module 'dayjs' {
 
 const extendDayjsPlugin = () => {
   dayjs.extend((o, c) => {
-    c.prototype.toTime = function () {
+    c.prototype.toTime = function (this: Dayjs) {
       return this.utc().format("HH:mm:ss");
     };
     
-    c.prototype.formatServer = function () {
-      return this.utc().format("DD-MM-YYYY");
+    c.prototype.formatServer = function (this: Dayjs) {
+      return this.utc().format("YYYY-MM-DD");
     };
   });
 };
