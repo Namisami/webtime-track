@@ -4,6 +4,7 @@ import LocalStorage, { LocalStorageArrayKeys, LocalStorageKeys } from "@/core/st
 import { ArrayElement } from "@/core/types/helper";
 import { StatisticsItemStorage } from "@/core/entities/storage/statisticsItem";
 import { intersection } from "lodash";
+import { URLFacade } from "@/utils/urls";
 
 const WATCH_KEYS: LocalStorageKeys[] = ["siteTimes"];
 
@@ -37,8 +38,9 @@ async function handleSiteTimesChanged({
   endTime,
   faviconUrl,
 }: LocalStorage["siteTimes"][number]) {
-  const updatedSite = await (new StatisticsItemStorage(url, faviconUrl).init());
+  const hostname = URLFacade(url).hostname;
+  const updatedSite = await (new StatisticsItemStorage(hostname, faviconUrl).init());
   updatedSite.sessionCount += 1;
   updatedSite.timeCount += endTime - startTime;
-  await updateLocalStorage("statistics", { [url]: updatedSite.getItem() });
+  await updateLocalStorage("statistics", { [hostname]: updatedSite.getItem() });
 };

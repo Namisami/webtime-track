@@ -1,12 +1,11 @@
 import { memo } from "react";
 import { reverse, sortBy } from "lodash";
 import dayjs from "dayjs";
-import { URLFacade } from "@/utils/urls";
 import Progressbar from "@/ui/components/common/Progressbar/Progressbar";
 import Box from "@/ui/components/common/Box/Box";
 import { Statistics, StatisticsItem } from "@/core/storage/types";
-import "./StatList.css";
 import { objectToArray } from "@/utils/objects";
+import "./StatList.css";
 
 export type StatListProps = {
   items: Statistics;
@@ -39,7 +38,6 @@ export const StatItem = memo(({
   timeCount,
   sessionCount,
 }: StatItemProps) => {
-  const hostname = URLFacade(url).hostname;
   const timeSpend = dayjs(timeCount).toTime();
   
   return (
@@ -48,7 +46,7 @@ export const StatItem = memo(({
         { faviconUrl && <img className="stat-item__icon" src={faviconUrl} /> }
         <div className="stat-item__content">
           <div className="stat-item__header">
-            <span className="stat-item__hostname">{hostname}</span>
+            <span className="stat-item__hostname">{url}</span>
             <span className="stat-item__interval">{timeSpend} ({sessionCount})</span>
           </div>
           <Progressbar 
