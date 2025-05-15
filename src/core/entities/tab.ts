@@ -1,5 +1,6 @@
 import { getActiveTab } from "@/core/functions/tab";
 import { appendLocalStorage } from "@/core/storage/helper";
+import dayjs from "dayjs";
 import { Tabs } from "webextension-polyfill";
 
 export class ActiveTab {
@@ -42,15 +43,18 @@ export class Tab {
   url: string;
   startTime: number | null;
   endTime: number | null;
+  faviconUrl?: string;
 
   constructor({ 
     id: tabId,
+    favIconUrl,
     windowId,
     url, 
   }: Tabs.Tab) {
     if (!url || !tabId || !windowId) throw new Error("Вкладка не валидна");
     this.url = url;
     this.tabId = tabId;
+    this.faviconUrl = favIconUrl;
     this.windowId = windowId;
     this.startTime = null;
     this.endTime = null;
@@ -76,6 +80,8 @@ export class Tab {
         url: this.url,
         startTime: this.startTime,
         endTime: this.endTime,
+        faviconUrl: this.faviconUrl,
+        date: dayjs().formatServer(),
       }]);
     }
   }

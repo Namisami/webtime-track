@@ -4,12 +4,15 @@ export interface SiteTime {
   url: string;
   startTime: number;
   endTime: number;
+  date: string;
+  faviconUrl?: string;
 };
 
 export type StatisticsItem = {
-  faviconUrl?: string;
+  period_date: string;
   timeCount: number;
   sessionCount: number;
+  faviconUrl?: string;
 }
 
 // Record<url, StatisticsItem>

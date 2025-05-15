@@ -34,9 +34,10 @@ export default async function handleStorageChanged(
 async function handleSiteTimesChanged({ 
   url, 
   startTime, 
-  endTime
+  endTime,
+  faviconUrl,
 }: LocalStorage["siteTimes"][number]) {
-  const updatedSite = await (new StatisticsItemStorage(url).init());
+  const updatedSite = await (new StatisticsItemStorage(url, faviconUrl).init());
   updatedSite.sessionCount += 1;
   updatedSite.timeCount += endTime - startTime;
   await updateLocalStorage("statistics", { [url]: updatedSite.getItem() });

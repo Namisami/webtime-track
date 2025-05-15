@@ -1,18 +1,20 @@
 import { getLocalStorageByParams } from "@/core/storage/helper";
 import { StatisticsItem } from "@/core/storage/types";
-import { URLFacade } from "@/utils/urls";
+import dayjs from "dayjs";
 
 export class StatisticsItemStorage {
   #url: string;
   #exist: boolean;
   #item: StatisticsItem;
 
-  constructor (url: string) {
+  constructor (url: string, faviconUrl?: string) {
     this.#url = url;
     this.#exist = false;
     this.#item = {
       sessionCount: 0,
       timeCount: 0,
+      period_date: dayjs().formatServer(),
+      faviconUrl,
     };
   }
 
@@ -23,7 +25,6 @@ export class StatisticsItemStorage {
       this.#item = existingStatItem;
       this.#exist = true;
     };
-    this.#item.faviconUrl = `https://www.google.com/s2/favicons?domain=${URLFacade(this.#url).origin}&sz=24`;
     return this;
   }
   

@@ -8,12 +8,15 @@ import handleUpdate from '@/core/handlers/handleUpdate';
 import handleInstall from '@/core/handlers/handleInstall';
 import handleStorageChanged from '@/core/handlers/handleStorageChanged';
 import handleActionClick from '@/core/handlers/handleActionClick';
+import initDayjsLoad from '@/plugins/dayjs';
 
 // async function trackTime() {
 //   console.log(await getActiveTab());
 // }
 
 function init() {
+  initDayjsLoad();
+
   try {
     // setInterval(trackTime, 1000)
     // Инициализация хранилища при установке
