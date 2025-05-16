@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs';
+import dayjsLib, { Dayjs } from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
@@ -10,7 +10,7 @@ declare module 'dayjs' {
 }
 
 const extendDayjsPlugin = () => {
-  dayjs.extend((o, c) => {
+  dayjsLib.extend((o, c) => {
     c.prototype.toTime = function (this: Dayjs) {
       return this.utc().format("HH:mm:ss");
     };
@@ -21,9 +21,11 @@ const extendDayjsPlugin = () => {
   });
 };
 
-export default function initDayjsLoad() {
-  dayjs.extend(utc);
-  dayjs.extend(timezone);
-  dayjs.extend(extendDayjsPlugin);
-  dayjs.tz.setDefault("Europe/Moscow");
-}
+dayjsLib.extend(utc);
+dayjsLib.extend(timezone);
+dayjsLib.extend(extendDayjsPlugin);
+dayjsLib.tz.setDefault("Europe/Moscow");
+
+// const dayjs = dayjs.tz;
+
+export default dayjsLib.tz;

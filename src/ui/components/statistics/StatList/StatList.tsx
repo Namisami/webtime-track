@@ -1,19 +1,18 @@
 import { memo } from "react";
 import { reverse, sortBy } from "lodash";
-import dayjs from "dayjs";
+import dayjs from "@/plugins/dayjs";
 import Progressbar from "@/ui/components/common/Progressbar/Progressbar";
 import Box from "@/ui/components/common/Box/Box";
-import { Statistics, StatisticsItem } from "@/core/storage/types";
-import { objectToArray } from "@/utils/objects";
+import { StatisticsItem, StatisticsWithURL } from "@/core/storage/types";
 import "./StatList.css";
 
 export type StatListProps = {
-  items: Statistics;
+  items: StatisticsWithURL;
 };
 
 const StatList = memo(({ items }: StatListProps) => {
-  const itemsWithUrl = objectToArray(items, "url"); 
-  const sortedItems = reverse(sortBy(itemsWithUrl, "timeCount"));
+  console.log(items)
+  const sortedItems = reverse(sortBy(items, "timeCount"));
   const summaryTime = sortedItems.reduce((acc, item) => acc += item.timeCount, 0);
 
   return (

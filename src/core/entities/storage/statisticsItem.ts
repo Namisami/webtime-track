@@ -1,6 +1,6 @@
 import { getLocalStorageByParams } from "@/core/storage/helper";
 import { StatisticsItem } from "@/core/storage/types";
-import dayjs from "dayjs";
+import dayjs from "@/plugins/dayjs";
 
 export class StatisticsItemStorage {
   #url: string;

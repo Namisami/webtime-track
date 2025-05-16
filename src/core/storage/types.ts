@@ -20,6 +20,10 @@ export interface Statistics {
   [url: string]: StatisticsItem;
 };
 
+export type StatisticsWithURL = (StatisticsItem & {
+  url: string;
+})[];
+
 export interface CommonStorageParams {
   date: string;
 }
