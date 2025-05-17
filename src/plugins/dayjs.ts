@@ -26,6 +26,4 @@ dayjsLib.extend(timezone);
 dayjsLib.extend(extendDayjsPlugin);
 dayjsLib.tz.setDefault("Europe/Moscow");
 
-// const dayjs = dayjs.tz;
-
 export default dayjsLib.tz;

@@ -1,6 +1,7 @@
-import { getLocalStorageByParams } from "@/core/storage/helper";
+import { getLocalStorageByParams, updateLocalStorage } from "@/core/storage/helper";
 import { StatisticsItem } from "@/core/storage/types";
 import dayjs from "@/plugins/dayjs";
+import { URLFacade } from "@/utils/urls";
 
 export class StatisticsItemStorage {
   #url: string;
@@ -8,7 +9,7 @@ export class StatisticsItemStorage {
   #item: StatisticsItem;
 
   constructor (url: string, faviconUrl?: string) {
-    this.#url = url;
+    this.#url = URLFacade(url).hostname;
     this.#exist = false;
     this.#item = {
       sessionCount: 0,
@@ -52,5 +53,9 @@ export class StatisticsItemStorage {
   set sessionCount(value: number) {
     if (!value) return;
     this.#item.sessionCount = value;
+  }
+
+  async save() {
+    await updateLocalStorage("statistics", { [this.#url]: this.#item });
   }
 }

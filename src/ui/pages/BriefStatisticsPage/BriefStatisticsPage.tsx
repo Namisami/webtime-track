@@ -7,6 +7,7 @@ import { objectToArray } from "@/utils/objects";
 import { useLocalStorage } from "@/ui/hooks/useLocalStorage";
 import { fetchStatistics } from "@/api/statistics";
 import './BriefStatisticsPage.css';
+import { omit } from "lodash";
 
 type BriefStatisticsPageProps = {
   period_date_start: string;
@@ -21,12 +22,25 @@ export default function BriefStatisticsPage({
   const [state, setState] = useState<StatisticsWithURL>([]);
 
   const getStatistics = async () => {
-    let statistics: StatisticsWithURL;
-    if (period_date_start === period_date_end) {
-      statistics = objectToArray(await getStorage(), "url") as StatisticsWithURL;
-    } else {
-      statistics = (await fetchStatistics({ period_date_start, period_date_end })).results;
+    const dayStats = await getStorage();
+
+    // let statistics: StatisticsWithURL = objectToArray(dayStats, "url");
+    if (period_date_start !== period_date_end) {
+      const periodStats = (await fetchStatistics({ period_date_start, period_date_end })).results;
+      periodStats.forEach((stat) => {
+        if (stat.url in dayStats) {
+          dayStats[stat.url] = {
+            ...stat,
+            sessionCount: dayStats[stat.url].sessionCount + stat.sessionCount,
+            timeCount: dayStats[stat.url].timeCount + stat.timeCount,
+          }
+        } else {
+          dayStats[stat.url] = omit(stat, "url");
+        }
+      })
     }
+
+    const statistics = objectToArray(dayStats, "url");
     setState(statistics);
   }
 
