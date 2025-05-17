@@ -16,7 +16,7 @@ const extendDayjsPlugin = () => {
     };
     
     c.prototype.formatServer = function (this: Dayjs) {
-      return this.utc().format("YYYY-MM-DD");
+      return this.format("YYYY-MM-DD");
     };
   });
 };

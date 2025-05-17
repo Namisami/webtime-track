@@ -11,7 +11,6 @@ export type StatListProps = {
 };
 
 const StatList = memo(({ items }: StatListProps) => {
-  console.log(items)
   const sortedItems = reverse(sortBy(items, "timeCount"));
   const summaryTime = sortedItems.reduce((acc, item) => acc += item.timeCount, 0);
 

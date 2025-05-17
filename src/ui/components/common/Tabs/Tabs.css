@@ -1,0 +1,16 @@
+.tabs__buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.tabs__tab {
+  border: none;
+  cursor: pointer;
+  padding: 1em 2em;
+  flex: 1;
+}
+
+.tabs__tab--current {
+  background: #004cff54;
+}

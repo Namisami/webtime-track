@@ -27,7 +27,6 @@ export default function BriefStatisticsPage({
     } else {
       statistics = (await fetchStatistics({ period_date_start, period_date_end })).results;
     }
-    console.log(statistics);
     setState(statistics);
   }
 

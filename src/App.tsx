@@ -7,19 +7,24 @@ function App() {
   const today = dayjs();
 
   const items: TabsProps["items"] = {
-    "day": <BriefStatisticsPage 
-    period_date_start={today.formatServer()} 
-    period_date_end={today.formatServer()} 
-    />,
-    "week": <BriefStatisticsPage 
-      period_date_start={today.add(-7, 'day').formatServer()} 
-      period_date_end={today.formatServer()}
-    />,
+    "day": {
+      title: "Сегодня",
+      render: () => <BriefStatisticsPage 
+        period_date_start={today.formatServer()} 
+        period_date_end={today.formatServer()} 
+      />
+    },
+    "week": {
+      title: "Неделя",
+      render: () => <BriefStatisticsPage 
+        period_date_start={today.add(-7, 'day').formatServer()} 
+        period_date_end={today.formatServer()}
+      />
+    },
   }
   
   return (
     <>
-      <h1>Статистика времени, проведенного на сайтах</h1>
       <Tabs items={ items }/>
     </>
   )
