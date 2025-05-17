@@ -1,4 +1,5 @@
 import { AgChartProps, AgCharts } from "ag-charts-react";
+import dayjs from "@/plugins/dayjs";
 import { useEffect, useState } from "react";
 
 type PieChartProps = Omit<AgChartProps, "options"> & {
@@ -8,6 +9,13 @@ type PieChartProps = Omit<AgChartProps, "options"> & {
     timeCount: number;  
   }[];
 };
+
+type TooltipRendererParams = {
+  datum: {
+    url: string;
+    timeCount: number;
+  };
+}
 
 const PieChart = ({
   data,
@@ -28,11 +36,21 @@ const PieChart = ({
           type: "pie",
           angleKey: "timeCount",
           legendItemKey: "url",
+          tooltip: {
+            renderer: ({ datum }: TooltipRendererParams) => {
+              return {
+                data: [{
+                  label: datum.url,
+                  value: dayjs(datum.timeCount * 1000).toTime()
+                }]
+              }
+            },
+          }
         },
       ],
       legend: {
         position: "right",
-      }
+      },
     });
   }, [data, title]);
 
