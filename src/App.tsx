@@ -4,6 +4,7 @@ import BriefStatisticsPage from '@/ui/pages/BriefStatisticsPage/BriefStatisticsP
 import dayjs from '@/plugins/dayjs';
 import { POMODORO_STATUSES, PomodoroAlarm } from '@/core/entities/alarms/PomodoroAlarm';
 import { useLocalStorage } from '@/ui/hooks/useLocalStorage';
+import { createTab } from '@/core/functions/tab';
 import './App.css'
 
 const today = dayjs();
@@ -56,6 +57,10 @@ function App() {
     }
   };
 
+  const handleSettingsClick = async () => {
+    createTab("extension-page.html");
+  };
+
   useEffect(() => {
     const handlePomodoroActivation = async () => {
       const pomodoroSettings = await getPomodoro();
@@ -73,7 +78,7 @@ function App() {
           <button className='app__icon' onClick={handlePomodoroActivate}>
             <img width={30} height={30} src={isPomodoroActive ? '/images/pomodoro-enabled.svg' : '/images/pomodoro-disabled.svg'} />
           </button>
-          <button className='app__icon'>
+          <button className='app__icon' onClick={handleSettingsClick}>
             <img width={30} height={30} src='/images/settings.svg' />
           </button>
         </div>
