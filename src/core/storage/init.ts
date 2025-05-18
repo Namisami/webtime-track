@@ -7,6 +7,15 @@ export default async function initializeStorage() {
     siteTimes: [],
     statistics: {},
     date: dayjs().formatServer(),
+
+    // Pomodoro
+    pomodoro: {
+      workDuration: 25 * 60,
+      shortBreak: 5 * 60,
+      longBreak: 15 * 60,
+      repeats: 4,
+      on: false,
+    },
   } satisfies LocalStorage;
 
   await Browser.storage.local.set(storage);

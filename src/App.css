@@ -1,1 +1,11 @@
+.app__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;  
+}
 
+.app__actions {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}

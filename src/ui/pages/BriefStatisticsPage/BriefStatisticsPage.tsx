@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { omit } from "lodash";
 import { StatisticsWithURL } from "@/core/storage/types";
 import Box from "@/ui/components/common/Box/Box";
 import PieChart from "@/ui/components/statistics/PieChart/PieChart";
@@ -7,7 +8,6 @@ import { objectToArray } from "@/utils/objects";
 import { useLocalStorage } from "@/ui/hooks/useLocalStorage";
 import { fetchStatistics } from "@/api/statistics";
 import './BriefStatisticsPage.css';
-import { omit } from "lodash";
 
 type BriefStatisticsPageProps = {
   period_date_start: string;
@@ -24,7 +24,6 @@ export default function BriefStatisticsPage({
   const getStatistics = async () => {
     const dayStats = await getStorage();
 
-    // let statistics: StatisticsWithURL = objectToArray(dayStats, "url");
     if (period_date_start !== period_date_end) {
       const periodStats = (await fetchStatistics({ period_date_start, period_date_end })).results;
       periodStats.forEach((stat) => {

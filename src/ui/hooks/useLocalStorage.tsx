@@ -1,5 +1,5 @@
 import LocalStorage, { LocalStorageKeys } from "@/core/storage/types";
-import { getLocalStorageByParams, setLocalStorage } from "@/core/storage/helper";
+import { getLocalStorageByParams, setLocalStorageByParam } from "@/core/storage/helper";
 import { useCallback } from "react";
 
 export function useLocalStorage<T extends LocalStorageKeys>(
@@ -9,25 +9,15 @@ export function useLocalStorage<T extends LocalStorageKeys>(
   (value: LocalStorage[T]) => Promise<void>
 ];
 
-export function useLocalStorage<T extends readonly LocalStorageKeys[]>(
-  keys: T
-): [
-  () => Promise<Pick<LocalStorage, T[number]>>,
-  (values: Partial<LocalStorage>) => Promise<void>
-];
-
-export function useLocalStorage<T extends LocalStorageKeys | readonly LocalStorageKeys[]>(
+export function useLocalStorage<T extends LocalStorageKeys>(
   keys: T
 ) {
   const get = useCallback(async () => {
-    if (Array.isArray(keys)) {
-      return await getLocalStorageByParams(keys as LocalStorageKeys[]);
-    }
-    return await getLocalStorageByParams(keys as LocalStorageKeys);
+    return await getLocalStorageByParams(keys);
   }, [keys]);
 
-  const set = useCallback(async (values: Partial<LocalStorage>) => {
-    await setLocalStorage(values);
+  const set = useCallback(async (values: LocalStorage[T]) => {
+    return await setLocalStorageByParam(keys, values);
   }, [keys]);
 
   return [get, set];

@@ -16,7 +16,9 @@
     "activeTab",
     "storage",
     "idle",
-    "webRequest"
+    "webRequest",
+    "alarms",
+    "notifications"
   ],
   "host_permissions": [
     "http://localhost:8000/*"

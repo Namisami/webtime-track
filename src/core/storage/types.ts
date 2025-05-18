@@ -8,6 +8,14 @@ export interface SiteTime {
   faviconUrl?: string;
 };
 
+export type PomodoroSettings = {
+  workDuration: number;
+  shortBreak: number;
+  longBreak: number;
+  repeats: number;
+  on: boolean;
+}
+
 export type StatisticsItem = {
   period_date: string;
   timeCount: number;
@@ -16,7 +24,7 @@ export type StatisticsItem = {
 }
 
 // Record<url, StatisticsItem>
-export interface Statistics {
+export type Statistics = {
   [url: string]: StatisticsItem;
 };
 
@@ -24,14 +32,17 @@ export type StatisticsWithURL = (StatisticsItem & {
   url: string;
 })[];
 
-export interface CommonStorageParams {
+export type CommonStorageParams = {
   date: string;
 }
 
-export default interface LocalStorage extends CommonStorageParams {
+type LocalStorage = {
   siteTimes: SiteTime[];
   statistics: Statistics;
-};
+  pomodoro: PomodoroSettings
+} & CommonStorageParams;
+
+export default LocalStorage;
 
 export type LocalStorageKeys = keyof LocalStorage;
 export type LocalStorageArrayKeys = ArrayKeys<LocalStorage>;
