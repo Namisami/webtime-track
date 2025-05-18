@@ -1,44 +1,10 @@
 import { useEffect, useState } from 'react';
-import Tabs, { TabsProps } from '@/ui/components/common/Tabs/Tabs';
-import BriefStatisticsPage from '@/ui/pages/BriefStatisticsPage/BriefStatisticsPage';
-import dayjs from '@/plugins/dayjs';
+import Tabs from '@/ui/components/common/Tabs/Tabs';
 import { POMODORO_STATUSES, PomodoroAlarm } from '@/core/entities/alarms/PomodoroAlarm';
 import { useLocalStorage } from '@/ui/hooks/useLocalStorage';
 import { createTab } from '@/core/functions/tab';
+import { briefStatisticsPageItems } from '@/const';
 import './App.css'
-
-const today = dayjs();
-
-const items: TabsProps["items"] = {
-  "day": {
-    title: "Сегодня",
-    render: () => <BriefStatisticsPage 
-      period_date_start={today.formatServer()} 
-      period_date_end={today.formatServer()} 
-    />
-  },
-  "week": {
-    title: "Неделя",
-    render: () => <BriefStatisticsPage 
-      period_date_start={today.add(-7, 'day').formatServer()} 
-      period_date_end={today.formatServer()}
-    />
-  },
-  "month": {
-    title: "Месяц",
-    render: () => <BriefStatisticsPage 
-      period_date_start={today.add(-1, 'month').formatServer()} 
-      period_date_end={today.formatServer()}
-    />
-  },
-  "all": {
-    title: "Все время",
-    render: () => <BriefStatisticsPage 
-      period_date_start={today.add(-20, 'year').formatServer()} 
-      period_date_end={today.formatServer()}
-    />
-  },
-}
 
 function App() {
   const [isPomodoroActive, setIsPomodoroActive] = useState(false);
@@ -83,7 +49,7 @@ function App() {
           </button>
         </div>
       </div>
-      <Tabs items={ items }/>
+      <Tabs items={ briefStatisticsPageItems }/>
     </>
   )
 }
