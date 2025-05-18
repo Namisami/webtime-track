@@ -70,9 +70,12 @@ function App() {
       <div className='app__header'>
         <h1>WebTime Scrobbler</h1>
         <div className='app__actions'>
-          <button onClick={handlePomodoroActivate}>помодоро</button>
-          { isPomodoroActive ? "+" : "-" }
-          <button>Настройки</button>
+          <button className='app__icon' onClick={handlePomodoroActivate}>
+            <img width={30} height={30} src={isPomodoroActive ? '/images/pomodoro-enabled.svg' : '/images/pomodoro-disabled.svg'} />
+          </button>
+          <button className='app__icon'>
+            <img width={30} height={30} src='/images/settings.svg' />
+          </button>
         </div>
       </div>
       <Tabs items={ items }/>
