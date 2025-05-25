@@ -13,6 +13,7 @@
 
 .navigation__content {
   flex: 5;
+  margin: 12px;
 }
 
 .navigation__tab {

@@ -83,5 +83,3 @@ export class PomodoroAlarm {
     await Browser.alarms.clearAll();
   }
 }
-
-new PomodoroAlarm();

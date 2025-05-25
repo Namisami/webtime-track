@@ -74,7 +74,7 @@ export class Tab {
 
   async save() {
     if (!this.url || !this.endTime || !this.startTime) throw new Error("Ошибка при сохранении интервала");
-    // TODO: проверять, приходит ли ошибка без интернета
+
     const today = dayjs().formatServer();
     const storageDate = await getLocalStorageByParams("date");
     if (today !== storageDate) {
