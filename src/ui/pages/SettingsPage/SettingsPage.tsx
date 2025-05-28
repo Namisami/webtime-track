@@ -3,6 +3,7 @@ import InputNumber from '@/ui/components/common/InputNumber/InputNumber';
 import { useLocalStorage } from '@/ui/hooks/useLocalStorage';
 import { useCallback, useEffect, useState } from 'react';
 import { PomodoroSettings } from '@/core/storage/types';
+import Button from '@/ui/components/common/Button/Button';
 import './SettingsPage.css';
 
 export default function SettingsPage() {
@@ -34,7 +35,7 @@ export default function SettingsPage() {
   };
 
   const handleInputChange = (name: string, value?: number) => {
-    if (name && value && state) {
+    if (state) {
       setState({...state, [name]: value});
     }
   };
@@ -75,12 +76,12 @@ export default function SettingsPage() {
         />
       </div>
       <div className='settings__actions'>
-        <button 
+        <Button
           className='settings__save'
           onClick={handleSaveSettings}
         >
           Сохранить
-        </button>
+        </Button>
       </div>
     </Box>
   )

@@ -1,13 +1,13 @@
-.input-number {
+.input {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.input-number__label {
+.input__label {
   font-size: 12px;
   margin: 3px 2px auto 0px;
 }
-.input-number__input {
+.input__input {
   border: 1px solid lightgrey;
   border-radius: 5px;
   padding: 8px 5px;

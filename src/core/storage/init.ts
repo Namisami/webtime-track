@@ -7,6 +7,7 @@ export default async function initializeStorage() {
     siteTimes: [],
     statistics: {},
     date: dayjs().formatServer(),
+    token: '',
 
     // Pomodoro
     pomodoro: {

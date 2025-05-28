@@ -34,6 +34,7 @@ export type StatisticsWithURL = (StatisticsItem & {
 
 export type CommonStorageParams = {
   date: string;
+  token: string;
 }
 
 type LocalStorage = {

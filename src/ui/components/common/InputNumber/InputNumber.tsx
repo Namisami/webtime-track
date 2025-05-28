@@ -21,12 +21,12 @@ const InputNumber = memo(function InputNumber({
   }
 
   return (
-    <div className={`input ${className}`}>
-      <label className="input__label" htmlFor={name}>
+    <div className={`input-number ${className}`}>
+      <label className="input-number__label" htmlFor={name}>
         {label}
       </label>
       <input
-        className="input__input"
+        className="input-number__input"
         value={value}
         id={name}
         name={name}

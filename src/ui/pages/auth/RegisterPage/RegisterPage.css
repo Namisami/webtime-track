@@ -1,0 +1,14 @@
+.register__title {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.register__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.register__actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+}

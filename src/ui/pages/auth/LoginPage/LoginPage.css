@@ -1,0 +1,14 @@
+.login__title {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.login__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.login__actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
+}

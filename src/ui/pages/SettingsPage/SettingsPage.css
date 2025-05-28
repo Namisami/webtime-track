@@ -14,12 +14,3 @@
   display: flex;
   justify-content: end;
 }
-.settings__save {
-  border-radius: 5px;
-  color: whitesmoke;
-  background: #0029ffba;
-  padding: 1em 2em;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-}
