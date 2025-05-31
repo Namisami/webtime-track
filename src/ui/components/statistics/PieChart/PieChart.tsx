@@ -2,7 +2,7 @@ import { AgChartProps, AgCharts } from "ag-charts-react";
 import dayjs from "@/plugins/dayjs";
 import { useEffect, useState } from "react";
 
-type PieChartProps = Omit<AgChartProps, "options"> & {
+export type PieChartProps = Omit<AgChartProps, "options"> & {
   title?: string;
   data: { 
     url: string;

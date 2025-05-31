@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { omit } from "lodash";
 import { StatisticsWithURL } from "@/core/storage/types";
 import Box from "@/ui/components/common/Box/Box";
-import PieChart from "@/ui/components/statistics/PieChart/PieChart";
+import PieChart, { PieChartProps } from "@/ui/components/statistics/PieChart/PieChart";
 import StatList from "@/ui/components/statistics/StatList/StatList";
 import { objectToArray } from "@/utils/objects";
 import { useLocalStorage } from "@/ui/hooks/useLocalStorage";
@@ -20,6 +20,23 @@ export default function BriefStatisticsPage({
 }: BriefStatisticsPageProps) {
   const [getStorage] = useLocalStorage("statistics");
   const [state, setState] = useState<StatisticsWithURL>([]);
+
+  const pieChartData = useMemo(() => {
+    const sortedState = state.sort((a, b) => b.timeCount - a.timeCount);
+    const restStats: PieChartProps["data"][number] = {
+      url: "Другое",
+      timeCount: 0
+    };
+    const showStats: PieChartProps["data"] = [];
+    sortedState.forEach((stat, idx) => {
+      if (idx < 10) {
+        showStats.push(stat);
+      } else {
+        restStats.timeCount += stat.timeCount;
+      }
+    })
+    return [...showStats, restStats];
+  }, [state]);
 
   const getStatistics = async () => {
     const dayStats = await getStorage();
@@ -49,7 +66,7 @@ export default function BriefStatisticsPage({
   
   return (
     <Box className="brief-statistics-page">
-      <PieChart data={state} />
+      <PieChart data={pieChartData} />
       <StatList items={state} />
     </Box>
   )
