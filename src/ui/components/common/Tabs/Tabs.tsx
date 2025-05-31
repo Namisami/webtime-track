@@ -7,10 +7,12 @@ export type TabsProps = {
     title: string;
     render: () => ReactNode;  
   }>;
+  className?: string;
 }
 
 export default function Tabs({
-  items
+  items,
+  className="",
 }: TabsProps) {
   const keys = Object.keys(items);
   const [current, setCurrent] = useState(keys[0]);
@@ -20,7 +22,7 @@ export default function Tabs({
   };
   
   return (
-    <Box className="tabs__container">
+    <Box className={`tabs__container ${className}`}>
       <div className="tabs__buttons">
         { Object.entries(items).map(([key, { title }]) => (
           <button 

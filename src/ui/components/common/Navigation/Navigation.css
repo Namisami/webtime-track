@@ -8,6 +8,12 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+.navigation__tabs {
+  display: flex;
+  flex-direction: column;
   gap: 2px;
 }
 

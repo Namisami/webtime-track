@@ -1,0 +1,13 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.app-extension__brief {
+  overflow: hidden;
+}
+
+.app-extension__exit {
+  width: 100%;
+}

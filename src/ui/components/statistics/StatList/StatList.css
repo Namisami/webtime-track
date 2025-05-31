@@ -1,10 +1,10 @@
 .stat-list {
   flex: 1;
-  height: 0%;
+  /* height: 0%; */
+  overflow: auto;
 }
 
 .stat-list__list {
-  overflow: auto;
   height: 100%;
 }
 
