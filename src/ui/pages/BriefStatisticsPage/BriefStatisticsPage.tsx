@@ -42,8 +42,8 @@ export default function BriefStatisticsPage({
     const dayStats = await getStorage();
 
     if (period_date_start !== period_date_end) {
-      const periodStats = (await fetchStatistics({ period_date_start, period_date_end })).results;
-      periodStats.forEach((stat) => {
+      const periodStats = (await fetchStatistics({ period_date_start, period_date_end }));
+      periodStats?.forEach((stat) => {
         if (stat.url in dayStats) {
           dayStats[stat.url] = {
             ...stat,
