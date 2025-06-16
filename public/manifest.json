@@ -26,11 +26,5 @@
   "background": {
     "service_worker": "src/background.ts",
     "type": "module"
-  },
-  "content_scripts": [
-    {
-      "js": ["src/script.ts"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  }
 }
